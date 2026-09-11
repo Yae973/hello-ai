@@ -244,30 +244,32 @@ if question:
     results = []
 
     for file in knowledge_dir.glob("*.txt"):
+        
         text = file.read_text(encoding="utf-8")
 
-    for line in text.splitlines():            
-        q = [word.strip().lower() for word in jieba.cut(question) if word.strip()]
-        l = [word.strip().lower() for word in jieba.cut(line) if word.strip()]
+        for line in text.splitlines():            
+            q = [word.strip().lower() for word in jieba.cut(question) if word.strip()]
+            l = [word.strip().lower() for word in jieba.cut(line) if word.strip()]
+        
 
-        stop_words = {"是", "的", "和", "了", "吗", "呢", "啊", "怎么", "什么", "干什么", "用来"}
+            stop_words = {"是", "的", "和", "了", "吗", "呢", "啊", "怎么", "什么", "干什么", "用来"}
 
-        q = [word for word in q if word not in stop_words]
+            q = [word for word in q if word not in stop_words]
 
-        score = 0
+            score = 0
 
-        for word in q:
-            if word in l or any(word in item for item in l):
-                score += 1
+            for word in q:
+                if word in l or any(word in item for item in l):
+                    score += 1
 
-        if score >= 1:
-            results.append(
-        {
-            "score": score,
-            "text": line,
-            "source": file.name
-        }
-    )
+            if score >= 1:
+                results.append(
+                    {
+                        "score": score,
+                        "text": line,
+                        "source": file.name
+          }
+                )
     
     if results:
         results.sort(

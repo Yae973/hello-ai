@@ -1,0 +1,4 @@
+Hello-AI 是一个本地知识库助手项目。
+它使用 Python 和 Streamlit 构建网页界面。
+它可以搜索 knowledge 文件夹中的资料。
+它会显示回答来源。
